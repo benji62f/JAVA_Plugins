@@ -23,17 +23,13 @@ public class PluginFinder implements ActionListener{
 
 	private final static int DELAY = 2000;
 
-	public PluginFinder(String dirPath, Editor editor) {
-		this.editor = editor;
+	public PluginFinder(String dirPath) {
+		editor = new Editor();
 		filter = new PluginFilter();
 		dir = new File(dirPath);
 		files = new ArrayList<String>();
 		timer = new Timer(DELAY, this);
 		timer.start();
-	}
-
-	public List<String> getAllClassFiles(){
-		return this.files;
 	}
 
 	public void actionPerformed(ActionEvent e){
