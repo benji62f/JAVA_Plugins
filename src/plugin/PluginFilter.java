@@ -10,7 +10,7 @@ public class PluginFilter implements FilenameFilter {
 		return isAPlugin(name);
 	}
 	
-	public boolean isAPlugin(String file){
+	private boolean isAPlugin(String file){
 		if(!file.toLowerCase().endsWith(".class"))
 			return false;
 		String fileName = file.substring(0, file.length()-6);
@@ -28,7 +28,7 @@ public class PluginFilter implements FilenameFilter {
 		return true;
 	}
 
-	public boolean hasAConstructorWithoutParam(Class<?> classFile){
+	private boolean hasAConstructorWithoutParam(Class<?> classFile){
 		Constructor<?>[] constructors = classFile.getConstructors();
 		for(int i=0 ; i<constructors.length ; i++){
 			if(constructors[i].getParameterCount() == 0)
@@ -37,11 +37,11 @@ public class PluginFilter implements FilenameFilter {
 		return false;
 	}
 	
-	public boolean belongsToPlugin(Class<?> classFile){
+	private boolean belongsToPlugin(Class<?> classFile){
 		return classFile.getPackage().getName().equals("plugin");
 	}
 	
-	public boolean extendsPlugin(Class<?> classFile){
+	private boolean extendsPlugin(Class<?> classFile){
 		return Plugin.class.isAssignableFrom(classFile);
 	}
 }

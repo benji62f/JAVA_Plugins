@@ -34,8 +34,11 @@ public class PluginFinder implements ActionListener{
 
 	public void actionPerformed(ActionEvent e){
 		String[] t = PluginFinder.this.dir.list(PluginFinder.this.filter);
-		PluginFinder.this.files = java.util.Arrays.asList(t);
-
+		if(t != null)
+			PluginFinder.this.files = java.util.Arrays.asList(t);
+		else
+			System.out.println("No file found in " + dir.getPath());
+			
 		for(int i=0 ; i<files.size() ; i++){
 			if(!pluginAllreadyExists(files.get(i)))
 				addAPlugin(files.get(i));
@@ -52,7 +55,7 @@ public class PluginFinder implements ActionListener{
 		return false;
 	}
 
-	public void addAPlugin(String file){
+	private void addAPlugin(String file){
 		String fileName = file.substring(0, file.length()-6);
 		try {
 			Class<?> classFile = Class.forName("plugin."+fileName);
